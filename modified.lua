@@ -95,24 +95,21 @@ local function checklisting(uid, gems, item, version, shiny, amount, username, p
         type = Library.Directory.Pets[item]
 end)
 
-    if type.exclusiveLevel and gems <= 10000 and item ~= "Banana" and item ~= "Coin" then
+    if type.exclusiveLevel and gems <= 50000 and item ~= "Banana" and item ~= "Coin" then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
-    elseif item == "Titanic Christmas Present" and gems <= 10000 then
-        game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)
-    elseif string.find(item, "Exclusive") and gems <= 10000 then
+    elseif item == "Titanic Christmas Present" and gems <= 100000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
     elseif string.find(item, "Charm") and gems <= 1000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
         processListingInfo(uid, gems, item, version, shiny, amount, username)
-    elseif type.huge and gems <= 1000000 then
+    elseif type.huge and gems <= 2500000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)     
-    elseif type.titanic and gems <= 10000000 then
+        processListingInfo(uid, gems, item, version, shiny, amount, username)
+    elseif type.titanic and gems <= 100000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)      
+        processListingInfo(uid, gems, item, version, shiny, amount, username)
     end
 end
 
