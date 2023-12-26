@@ -19,74 +19,6 @@ if not getgenv().a then
     
 end
 
-local function processListingInfo(uid, gems, item, version, shiny, amount, boughtFrom)
-    print(uid, gems, item, version, shiny, amount, boughtFrom)
-    print("BOUGHT FROM:", boughtFrom)
-    print("UID:", uid)
-    print("GEMS:", gems)
-    print("ITEM:", item)
-    local snipeMessage = game.Players.LocalPlayer.Name .. " just sniped a "
-    if version then
-        if version == 2 then
-            version = "Rainbow"
-        elseif version == 1 then
-            version = "Golden"
-        end
-    else
-       version = "Normal"
-    end
-    
-    snipeMessage = snipeMessage .. version
-    
-    if shiny then
-        snipeMessage = snipeMessage .. " Shiny"
-    end
-    
-    snipeMessage = snipeMessage .. " " .. (item)
-    
-    print(snipeMessage)
-    
-    if amount then
-        print("AMOUNT:", amount)
-    else
-        amount = 1
-        print("AMOUNT:", amount)
-    end
-    
-    message1 = {
-        ['content'] = "Goofyahh Sniper",
-        ['embeds'] = {
-            {
-                ['title'] = snipeMessage,
-                ["color"] = tonumber(0x33dd99),
-                ["timestamp"] = DateTime.now():ToIsoDate(),
-                ['fields'] = {
-                    {
-                        ['name'] = "PRICE:",
-                        ['value'] = tostring(gems) .. " GEMS",
-                    },
-                    {
-                        ['name'] = "BOUGHT FROM:",
-                        ['value'] = tostring(boughtFrom),
-                    },
-                    {
-                        ['name'] = "AMOUNT:",
-                        ['value'] = tostring(amount),
-                    },
-                    {
-                        ['name'] = "PETID:",
-                        ['value'] = tostring(uid),
-                    },
-                },
-            },
-        }
-    }
-
-    local http = game:GetService("HttpService")
-    local jsonMessage = http:JSONEncode(message1)
-    http:PostAsync(getgenv().webhook, jsonMessage)
-end
-
 local function checklisting(uid, gems, item, version, shiny, amount, username, playerid)
     local Library = require(game.ReplicatedStorage:WaitForChild('Library'))
     gems = tonumber(gems)
@@ -97,19 +29,14 @@ end)
 
     if type.exclusiveLevel and gems <= 50000 and item ~= "Banana" and item ~= "Coin" then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)
     elseif item == "Titanic Christmas Present" and gems <= 100000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)
     elseif string.find(item, "Charm") and gems <= 1000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)
     elseif type.huge and gems <= 2500000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)
     elseif type.titanic and gems <= 100000000 then
         game:GetService("ReplicatedStorage").Network.Booths_RequestPurchase:InvokeServer(playerid, uid)
-        processListingInfo(uid, gems, item, version, shiny, amount, username)
     end
 end
 
