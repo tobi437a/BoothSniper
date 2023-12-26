@@ -41,6 +41,7 @@ end)
 end
 
 Booths_Broadcast.OnClientEvent:Connect(function(username, message)
+    if message == nil then return end
     local playerID = message['PlayerID']
     if type(message) == "table" then
         local listing = message["Listings"]
