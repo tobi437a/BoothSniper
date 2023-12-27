@@ -96,7 +96,7 @@ end
 
 while wait(0.1) do
     PlayerInServer = #Players:GetPlayers()
-    if PlayerInServer < 30 or os.time() >= ostime + 840 then
+    if PlayerInServer < 28 or os.time() >= ostime + 840 then
         jumpToServer()
         break
     end
